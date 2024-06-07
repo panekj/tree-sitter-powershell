@@ -29,7 +29,7 @@ module.exports = grammar({
     [$.expandable_string_literal],
     [$.path_command_name, $._value]
   ],
-  
+
   rules: {
 
     program: $ => seq(
@@ -158,7 +158,7 @@ module.exports = grammar({
 
     // Type names
     type_identifier: $ => /[a-zA-Z0-9_]+/,
-    
+
     type_name: $ => choice(
       $.type_identifier,
       seq($.type_name, ".", $.type_identifier )
@@ -217,7 +217,7 @@ module.exports = grammar({
       $.braced_variable
     ),
 
-    braced_variable: $=> /\${[^}]+}/,
+    braced_variable: $=> /\$\{[^}]+\}/,
 
     // Commands
     generic_token: $ => token(
@@ -272,7 +272,7 @@ module.exports = grammar({
       field("named_block_list", $.named_block_list),
       field("statement_list", $.statement_list)
     ),
-    
+
     named_block_list: $ => repeat1(
       $.named_block
     ),
@@ -679,7 +679,7 @@ module.exports = grammar({
     ),
 
     // Expressions
-    
+
     _expression: $ => $.logical_expression,
 
     logical_expression: $ => prec.left(choice(
@@ -861,7 +861,7 @@ module.exports = grammar({
         choice("-and", "-or", "-xor"), $.bitwise_argument_expression
       )
     )),
-    
+
     bitwise_argument_expression: $ => prec.left(choice(
       $.comparison_argument_expression,
       seq (
